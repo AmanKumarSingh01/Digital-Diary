@@ -45,7 +45,7 @@ const UserSechema = new Schema({
     }]
 });
 
-userSchema.virtual('tasks', {
+UserSechema.virtual('tasks', {
     ref: 'Task',
     localField: '_id',
     foreignField: 'owner'
@@ -98,7 +98,7 @@ UserSechema.pre('save', async function(next){
     }
     next();
 })
-userSchema.pre('remove', async function (next) {
+UserSechema.pre('remove', async function (next) {
     const user = this
     await Task.deleteMany({ owner: user._id })
     next()
